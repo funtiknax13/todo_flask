@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Редактирование задачи
+{% endblock %}
+
+{% block body%}
+    <h1>Редактирование задачи</h1>
+    <form method="post">
+        <input type="text" name="title" id="title" class="form-control" value="{{ task.title }}" placeholder="Краткое описание задачи"><br>
+        <textarea name="text" id="text"  class="form-control" placeholder="Подробности">{{ task.text }}</textarea><br>
+        <input type="datetime-local" name="deadline" id="deadline" class="form-control" value="{{ task.deadline }}" placeholder="Срок выполнения"><br>
+        <input type="submit" class="btn btn-success" value="Изменить">
+    </form>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Все задачи
+{% endblock %}
+
+{% block body%}
+    <h1>Все задачи</h1>
+    {% if tasks %}
+    {% for task in tasks %}
+        <div class="card-group pt-2">
+            <div class="card text-black bg-info" >
+               <div class="card-body" bis_skin_checked="1">
+                   <h5 class="card-title">{{ task.title }}
+                    {% if task.get_status() == 0 %}
+                        <span class="badge bg-warning text-wrap">В работе</span>
+                    {% elif task.get_status() == 1 %}
+                        <span class="badge bg-success text-wrap">Исполнена</span>
+                    {% elif task.get_status() == 2 %}
+                        <span class="badge bg-secondary text-wrap">Просрочена</span>
+                    {% elif task.get_status() == 3 %}
+                        <span class="badge bg-warning text-wrap">В работе</span>
+                        <span class="badge bg-danger text-wrap">Срочно</span>
+                    {% endif %}</p></h5>
+                  <p class="card-text">Дедлайн - {{ task.deadline }}</p>
+                  <a href="/tasks/{{ task.id }}" class="btn btn-primary">Подробнее</a>
+               </div>
+            </div>
+        </div>
+    {% endfor %}
+    {% else %}
+        <p>Нет ранее созданных задач</p>
+    {% endif %}
+{% endblock %}

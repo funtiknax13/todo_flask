@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ task.title}}
+{% endblock %}
+
+{% block body%}
+        <div class="card-group pt-2">
+            <div class="card text-black bg-info" >
+               <div class="card-body" bis_skin_checked="1">
+                   <h4 class="card-title">{{ task.title }}
+                       {% if task.get_status() == 0 %}
+                        <span class="badge bg-warning text-wrap">В работе</span>
+                        {% elif task.get_status() == 1 %}
+                        <span class="badge bg-success text-wrap">Исполнена</span>
+                        {% elif task.get_status() == 2 %}
+                        <span class="badge bg-secondary text-wrap">Просрочена</span>
+                        {% elif task.get_status() == 3 %}
+                        <span class="badge bg-warning text-wrap">В работе</span>
+                        <span class="badge bg-danger text-wrap">Срочно</span>
+                    {% endif %}
+                   </h4>
+                   <p class="card-text">{{ task.get_text()|safe }}</p>
+                   <p class="card-text">Дедлайн - {{ task.deadline }}</p>
+                   <p class="card-text">Дата создания задачи - <date>{{ task.date }}</date></p>
+                   <a href="/tasks/{{ task.id }}/delete" class="btn btn-danger">Удалить</a>
+                {% if task.get_status() == 1 %}
+                    <a href="/tasks/{{ task.id }}/change_status_0" class="btn btn-warning">Вернуть в работу</a>
+                {% elif task.get_status() == 0 or task.get_status() == 2 or task.get_status() == 3%}
+                    <a href="/tasks/{{ task.id }}/change_status_1" class="btn btn-success">Завершить</a>
+                {% endif %}
+                    <a href="/tasks/{{ task.id }}/update" class="btn btn-primary">Редактировать</a>
+               </div>
+            </div>
+        </div>
+
+
+{% endblock %}

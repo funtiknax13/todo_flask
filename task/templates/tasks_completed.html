@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Закрытые задачи
+{% endblock %}
+
+{% block body%}
+    <h1>Закрытые задачи</h1>
+    {% if tasks %}
+    {% for task in tasks %}
+        <div class="card-group pt-2">
+            <div class="card text-black bg-info" >
+               <div class="card-body" bis_skin_checked="1">
+                   <h5 class="card-title">{{ task.title }}
+                     {% if task.get_status() == 1 %}
+                   <span class="badge bg-success text-wrap">Исполнена</span>
+                    {% endif %}</p></h5>
+                  <p class="card-text">Дедлайн - {{ task.deadline }}</p>
+                  <a href="/tasks/{{ task.id }}" class="btn btn-primary">Подробнее</a>
+               </div>
+            </div>
+        </div>
+
+    {% endfor %}
+    {% else %}
+        <p>Нет завершенных задач</p>
+    {% endif %}
+{% endblock %}

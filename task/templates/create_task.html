@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Добавление задачи
+{% endblock %}
+
+{% block body%}
+    <h1>Добавление задачи</h1>
+    <form method="post">
+        <input type="text" name="title" id="title" class="form-control" placeholder="Краткое описание задачи"><br>
+        <textarea name="text" id="text"  class="form-control" placeholder="Подробности"></textarea><br>
+        <input type="datetime-local" name="deadline" id="deadline" class="form-control" placeholder="Срок выполнения"><br>
+        <input type="submit" class="btn btn-success" value="Создать">
+    </form>
+{% endblock %}
